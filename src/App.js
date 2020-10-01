@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Quiz from './components/Quiz';
+import StartingPage from './components/StartingPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const initialConfig = {
+        category: 0,
+        difficulty: 'Any Difficulty'
+    };
+
+    const [started, setStarted] = useState(false);
+    const [quizConfig, setQuizConfig] = useState(initialConfig);
+
+    function onStart(config) {
+        setQuizConfig(config);
+        setStarted(true);
+    }
+
+    function onRestart() {
+        setStarted(false);
+        setQuizConfig(initialConfig)
+    }
+
+    return (
+        <div>
+            {!started ? <StartingPage onStart={onStart} /> : <Quiz config={quizConfig} onRestart={onRestart} />}
+        </div>
+    );
 }
 
 export default App;
