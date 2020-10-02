@@ -1,10 +1,11 @@
 import React from 'react';
+import { StyledButton, ResultWrapper } from './styled';
 
 export default function Result({ correct, total, onRestart }) {
     return (
         <div>
-            <div>You got {correct}/{total}!</div>
-            <button onClick={onRestart}>Start Again</button>
+            <ResultWrapper>You got {correct}/{total}!</ResultWrapper>
+            <StyledButton onClick={onRestart}>Start Again</StyledButton>
         </div>
     );
 }

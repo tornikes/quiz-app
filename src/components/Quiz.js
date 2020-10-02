@@ -3,6 +3,7 @@ import quizService from '../quizService';
 import { computeCorrects } from '../utils';
 import Question from './Question';
 import Result from './Result';
+import { ErrorMessage } from './styled';
 
 export default function Quiz({ config, onRestart }) {
     const [questions, setQuestions] = useState([]);
@@ -46,10 +47,10 @@ export default function Quiz({ config, onRestart }) {
         );
     } else if (fetchFailed) {
         return (
-            <div>
-                <h1>There don't seem to be enough questions in that category for that level of difficulty :/</h1>
+            <ErrorMessage>
+                <h2>There don't seem to be enough questions in that category for that level of difficulty :/</h2>
                 <p>You will be returned to start page in 5 seconds</p>
-            </div>
+            </ErrorMessage>
         );
     } else {
         return null;

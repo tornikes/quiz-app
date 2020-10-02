@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { shuffle } from '../utils';
+import { StyledButton, QuestionWrapper, AnswerWrapper, Answer } from './styled';
 
 export default function Question({ quest, onAnswer }) {
     const [answers, setAnswers]= useState([]);
@@ -15,15 +16,15 @@ export default function Question({ quest, onAnswer }) {
     
     return (
         <div>
-            <div dangerouslySetInnerHTML={{ __html: quest.question}}>
-            </div>
-            <div>
+            <QuestionWrapper dangerouslySetInnerHTML={{ __html: quest.question}}>
+            </QuestionWrapper>
+            <AnswerWrapper>
                 {answers.map(ans => (
-                    <div key={ans} onClick={() => setSelected(ans)} dangerouslySetInnerHTML={{ __html: ans}}>
-                    </div>
+                    <Answer key={ans} onClick={() => setSelected(ans)} dangerouslySetInnerHTML={{ __html: ans}} active={selected === ans}>
+                    </Answer>
                 ))}
-            </div>
-            <button disabled={!selected.length} onClick={submitAnswer}>Next</button>
+            </AnswerWrapper>
+            <StyledButton disabled={!selected.length} onClick={submitAnswer}>Next</StyledButton>
         </div>
     );
 }
